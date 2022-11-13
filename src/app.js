@@ -4,6 +4,7 @@ import express from 'express';
 import { CheckIn, CheckOut, User } from './models/index.js';
 import sequelize from './utils/database.js';
 import { authRoutes, checkRoutes } from './routes/index.js';
+import swaggerDocs from './utils/swagger.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ sequelize
   .sync()
   .then(() => {
     app.listen(8000);
+    swaggerDocs(app, 8000);
   })
   .catch((err) => {
     console.log(err);
