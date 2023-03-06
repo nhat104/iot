@@ -4,9 +4,17 @@ export const signupSchema = Joi.object({
   fullName: Joi.string().required(),
   username: Joi.string().required(),
   password: Joi.string().required(),
-  phone: Joi.string().required(),
-  birthday: Joi.string(),
-  address: Joi.string(),
-  image: Joi.string(),
   role: Joi.string(),
+});
+
+export const addEmployee = Joi.object({
+  fullName: Joi.string().required(),
+  username: Joi.string().required(),
+  password: Joi.string().required(),
+});
+
+export const editEmployee = Joi.object({
+  fullName: Joi.string().required(),
+  username: Joi.string().required(),
+  password: Joi.string().optional(),
 });

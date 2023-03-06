@@ -9,11 +9,7 @@ const CheckIn = sequelize.define('checkIn', {
     primaryKey: true,
   },
   date: {
-    type: DataTypes.DATEONLY,
-    allowNull: false,
-  },
-  time: {
-    type: DataTypes.TIME,
+    type: DataTypes.DATE,
     allowNull: false,
   },
 });

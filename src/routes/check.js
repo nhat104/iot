@@ -1,5 +1,6 @@
 import express from 'express';
 import { checkIn, checkOut } from '../controllers/check.js';
+import { statisticByDay, statisticByWeek } from '../controllers/statistic.js';
 
 const router = express.Router();
 
