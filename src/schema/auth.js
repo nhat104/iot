@@ -11,12 +11,6 @@
  *          type: string
  *        password:
  *          type: string
- *        address:
- *          type: string
- *        phone:
- *          type: string
- *        birthday:
- *          type: string
  *    SignUpResponse:
  *      type: object
  *      properties:
@@ -35,12 +29,6 @@
  *                username:
  *                  type: string
  *                fullName:
- *                  type: string
- *                address:
- *                  type: string
- *                phone:
- *                  type: string
- *                birthday:
  *                  type: string
  *                role:
  *                  type: string
@@ -69,12 +57,6 @@
  *                username:
  *                  type: string
  *                fullName:
- *                  type: string
- *                address:
- *                  type: string
- *                phone:
- *                  type: string
- *                birthday:
  *                  type: string
  *                role:
  *                  type: string

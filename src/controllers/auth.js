@@ -8,20 +8,12 @@ export const signup = async (req, res) => {
   if (error) {
     return ResponseJson.error(res, error.details[0].message, 422);
   }
-  const { fullName, username, password, address, phone, birthday, role = 'employee' } = value;
+  const { fullName, username, password, role = 'employee' } = value;
 
   try {
-    const user = await User.create({
-      fullName,
-      username,
-      password,
-      address,
-      phone,
-      birthday,
-      role,
-    });
+    const user = await User.create({ fullName, username, password, role });
     const data = {
-      user: { id: user.id, username, fullName, role, address, phone, birthday, role },
+      user: { id: user.id, username, fullName, role },
     };
     ResponseJson.created(res, data);
   } catch (err) {
@@ -43,9 +35,6 @@ export const login = (req, res) => {
           id: user.id,
           username,
           fullName: user.fullName,
-          address: user.address,
-          phone: user.phone,
-          birthday: user.birthday,
           role: user.role,
         },
       };
