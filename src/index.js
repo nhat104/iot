@@ -1,30 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from './reportWebVitals';
 
-import { createStore } from 'redux'
+import { createStore } from 'redux';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import rootReducer from './redux/reducers'
+import rootReducer from './redux/reducers';
 
-import './assets/boxicons-2.0.7/css/boxicons.min.css'
-import './assets/css/grid.css'
-import './assets/css/theme.css'
-import './assets/css/index.css'
+import './assets/boxicons-2.0.7/css/boxicons.min.css';
+import './assets/css/grid.css';
+import './assets/css/index.css';
+import './assets/css/theme.css';
 
-import Layout from './components/layout/Layout'
+import App from 'App';
+import { BrowserRouter } from 'react-router-dom';
 
-const store = createStore(
-  rootReducer
-)
+const store = createStore(rootReducer);
 
-document.title = 'Tua CRM'
+document.title = 'Tua CRM';
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <Layout />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')
