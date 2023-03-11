@@ -64,7 +64,9 @@ const Dashboard = () => {
     <div>
       <h2 className='page-header'>Dashboard</h2>
       <div className='row'>
-        <div className='col-6'>
+        {/* total employee */}
+        {/* total employee work 8 hour a day in week */}
+        {/* <div className='col-6'>
           <div className='row'>
             {statusCards.map((item, index) => (
               <div className='col-6' key={index}>
@@ -72,14 +74,14 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <div className='col-6'>
           <div className='card full-height'>
             {/* chart */}
             <Count8HChart />
           </div>
         </div>
-        <div className='col-8'>
+        <div className='col-6'>
           <div className='card full-height'>
             {/* chart */}
             <WorkHourChart />

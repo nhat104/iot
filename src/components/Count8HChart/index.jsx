@@ -49,7 +49,7 @@ export default function Count8HChart() {
           : { ...options, theme: { mode: 'light' } }
       }
       series={series}
-      type='bar'
+      type='line'
       height='100%'
     />
   );
