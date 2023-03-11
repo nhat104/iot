@@ -1,4 +1,4 @@
-import { CheckIn, CheckOut } from '../models/index.js';
+import { CheckIn, CheckOut, User } from '../models/index.js';
 import sequelize from '../utils/database.js';
 import * as ResponseJson from '../utils/ResponseJson.js';
 import * as StatisticValidate from '../validations/statistic.js';
@@ -53,7 +53,12 @@ export const statisticByWeek = async (req, res) => {
     for (let i = 0; i < 7; i++) {
       let date = new Date(dateStart.getTime() + i * 24 * 60 * 60 * 1000).toLocaleDateString();
       const month = new Date(date).getMonth() + 1;
-      if (month < 10) {
+      const day = new Date(date).getDate();
+      if (month < 10 && day < 10) {
+        date = `0${month}/0${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+      } else if (day < 10) {
+        date = `${month}/0${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+      } else if (month < 10) {
         date = `0${month}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
       }
       dateArr.push(date);
@@ -82,7 +87,12 @@ export const getWorkHoursByWeek = async (req, res) => {
     for (let i = 0; i < 7; i++) {
       let date = new Date(dateStart.getTime() + i * 24 * 60 * 60 * 1000).toLocaleDateString();
       const month = new Date(date).getMonth() + 1;
-      if (month < 10) {
+      const day = new Date(date).getDate();
+      if (month < 10 && day < 10) {
+        date = `0${month}/0${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+      } else if (day < 10) {
+        date = `${month}/0${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+      } else if (month < 10) {
         date = `0${month}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
       }
       dateArr.push(date);
@@ -178,4 +188,40 @@ const getWorkHoursByDate = async (date, res) => {
     }
   });
   return sum;
+};
+
+export const latestCheckIn = async (req, res) => {
+  try {
+    const { limit } = req.query;
+    const checkIn = await CheckIn.findAll({
+      order: [['date', 'DESC']],
+      limit: +limit || 10,
+      include: [{ model: User, attributes: ['fullName'] }],
+      group: ['date', 'userId'],
+    });
+    if (!checkIn) {
+      return ResponseJson.error(res, 'Check in not found');
+    }
+    ResponseJson.success(res, checkIn);
+  } catch (err) {
+    ResponseJson.error(res, err);
+  }
+};
+
+export const latestCheckOut = async (req, res) => {
+  try {
+    const { limit } = req.query;
+    const checkOut = await CheckOut.findAll({
+      order: [['date', 'DESC']],
+      limit: +limit || 10,
+      include: [{ model: User, attributes: ['fullName'] }],
+      group: ['date', 'userId'],
+    });
+    if (!checkOut) {
+      return ResponseJson.error(res, 'Check out not found');
+    }
+    ResponseJson.success(res, checkOut);
+  } catch (err) {
+    ResponseJson.error(res, err);
+  }
 };

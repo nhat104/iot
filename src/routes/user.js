@@ -1,6 +1,12 @@
 import express from 'express';
 import { login } from '../controllers/auth.js';
-import { addEmployee, deleteEmployee, editEmployee, getAllEmployee } from '../controllers/user.js';
+import {
+  addEmployee,
+  deleteEmployee,
+  editEmployee,
+  getAllEmployee,
+  statisticByWeek,
+} from '../controllers/user.js';
 
 const router = express.Router();
 
@@ -53,5 +59,7 @@ router.post('/', addEmployee);
 router.put('/:userId', editEmployee);
 
 router.delete('/:userId', deleteEmployee);
+
+router.post('/statistic/week', statisticByWeek);
 
 export default router;
