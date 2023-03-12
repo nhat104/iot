@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import statisticApi from 'api/statisticApi';
 import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
@@ -42,15 +43,20 @@ export default function Count8HChart() {
   }, []);
 
   return (
-    <Chart
-      options={
-        themeReducer === 'theme-mode-dark'
-          ? { ...options, theme: { mode: 'dark' } }
-          : { ...options, theme: { mode: 'light' } }
-      }
-      series={series}
-      type='line'
-      height='100%'
-    />
+    <Box sx={{ mt: 5 }}>
+      <Typography variant='h5' sx={{ mb: 2 }}>
+        Employees work more than 8 hours a day
+      </Typography>
+      <Chart
+        options={
+          themeReducer === 'theme-mode-dark'
+            ? { ...options, theme: { mode: 'dark' } }
+            : { ...options, theme: { mode: 'light' } }
+        }
+        series={series}
+        type='line'
+        height='300px'
+      />
+    </Box>
   );
 }

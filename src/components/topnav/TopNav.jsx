@@ -1,19 +1,10 @@
-import React from 'react';
-import './topnav.css';
-import { Link, useNavigate } from 'react-router-dom';
-import Dropdown from '../dropdown/Dropdown';
-import ThemeMenu from '../thememenu/ThemeMenu';
-import notifications from 'assets/JsonData/notification.json';
+import { Box } from '@mui/material';
 import user_image from 'assets/images/tuat.png';
 import user_menu from 'assets/JsonData/user_menus.json';
-import { Box } from '@mui/material';
-
-const renderNotificationItem = (item, index) => (
-  <div className='notification-item' key={index}>
-    <i className={item.icon}></i>
-    <span>{item.content}</span>
-  </div>
-);
+import { useNavigate } from 'react-router-dom';
+import Dropdown from '../dropdown/Dropdown';
+import ThemeMenu from '../thememenu/ThemeMenu';
+import './topnav.css';
 
 const renderUserToggle = (user) => (
   <div className='topnav__right-user'>
@@ -34,7 +25,7 @@ const Topnav = () => {
   };
 
   const curr_user = {
-    display_name: user?.fullName || 'Admin',
+    display_name: user?.username || 'Admin',
     image: user_image,
   };
 
@@ -65,7 +56,7 @@ const Topnav = () => {
             renderItems={(item, index) => renderUserMenu(item, index)}
           />
         </div>
-        <div className='topnav__right-item'>
+        {/* <div className='topnav__right-item'>
           <Dropdown
             icon='bx bx-bell'
             badge='12'
@@ -73,8 +64,7 @@ const Topnav = () => {
             renderItems={(item, index) => renderNotificationItem(item, index)}
             renderFooter={() => <Link to='/'>View All</Link>}
           />
-          {/* dropdown here */}
-        </div>
+        </div> */}
         <div className='topnav__right-item'>
           <ThemeMenu />
         </div>

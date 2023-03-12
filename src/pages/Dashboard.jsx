@@ -1,7 +1,5 @@
 import statisticApi from 'api/statisticApi';
-import statusCards from 'assets/JsonData/status-card-data.json';
 import Count8HChart from 'components/Count8HChart';
-import StatusCard from 'components/status-card/StatusCard';
 import Table from 'components/table/Table';
 import WorkHourChart from 'components/WorkHourChart';
 import { useEffect, useState } from 'react';
