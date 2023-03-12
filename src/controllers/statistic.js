@@ -49,7 +49,7 @@ export const statisticByWeek = async (req, res) => {
     const dateNow = new Date();
     // get the date 1 week ago
     const dateStart = new Date(dateNow.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const dateArr = [];
+    const data = [];
     for (let i = 0; i < 7; i++) {
       let date = new Date(dateStart.getTime() + i * 24 * 60 * 60 * 1000).toLocaleDateString();
       const month = new Date(date).getMonth() + 1;
@@ -61,18 +61,20 @@ export const statisticByWeek = async (req, res) => {
       } else if (month < 10) {
         date = `0${month}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
       }
-      dateArr.push(date);
+      data.push({ date });
     }
-    const gte8Hs = [];
 
     await Promise.all(
-      dateArr.map(async (date) => {
-        const gte8H = await countGte8H(date, res);
-        gte8Hs.push(gte8H);
+      data.map(async (item, index) => {
+        const gte8H = await countGte8H(item.date, res);
+        data[index].count = gte8H;
       })
     );
 
-    ResponseJson.success(res, { dateArr, gte8Hs });
+    ResponseJson.success(res, {
+      dateArr: data.map((item) => item.date),
+      gte8Hs: data.map((item) => item.count),
+    });
   } catch (err) {
     ResponseJson.error(res, err);
   }
